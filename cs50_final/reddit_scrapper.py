@@ -24,9 +24,22 @@ class reddit_scrapper:
         # open up reddit to r/pics
         self.driver.get('https://www.reddit.com/r/pics/')
 
-        # self.driver.execute_script("window.scrollTo(0, 500)")
+        # Get source of the "hottest" img on r/pics
         image_path = self.driver.find_elements_by_class_name('ImageBox-image')[0].get_attribute('src')
+
+        # Go to source of the img and save it to the daily_images directory
         urllib.request.urlretrieve(image_path, "./daily_image/daily.jpg")
+
+        # Find user who posted the photo. The 0th index is always the pinned message 
+        username = self.driver.find_elements_by_xpath(
+            '// a[starts-with(@href, "/user/")]')[1].text
+        
+        # open description.txt and delete previous daily image information
+        open("./daily_image/description.txt", "w").close()
+        
+        # write to file new image information
+        file = open("./daily_image/description.txt", "a")
+        file.write(username)
 
 # This is here for testing delete after
 if __name__ == '__main__':
