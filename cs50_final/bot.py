@@ -51,7 +51,7 @@ class InstagramBot:
         self.driver.get('{}/accounts/login/'.format(self.base_url))
 
         # find username and password inputs by name
-        time.sleep(1)
+        time.sleep(1.5)
         self.driver.find_element_by_name('username').send_keys(self.username)
         self.driver.find_element_by_name('password').send_keys(self.password)
 
@@ -83,10 +83,16 @@ class InstagramBot:
         follow_button.click()
 
     def upload_photo(self):
-        get_photo = reddit_scrapper()
-        get_photo.get_image()
-        # upload_button = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/nav[2]/div/div/div[2]/div/div/div[3]/svg')
-        # upload_button.click()
+        # get_photo = reddit_scrapper()
+        # get_photo.get_image()
+        
+        upload_button = self.driver.find_element_by_xpath(
+            '// *[@id="react-root"]/section/nav[2]/div/div/div[2]/div/div/div[3]')
+       
+        # Try different input xpath
+        file_button = self.driver.find_elements_by_xpath(
+            '//*[@id="react-root"]/section/main/section/div[3]/div[1]/div[2]/form/input')[0].send_keys(os.getcwd() + '/daily_image/daily.jpg')
+        
 
 
 #  if this is the file that is executed when you initially run the program
@@ -99,5 +105,8 @@ if __name__ == '__main__':
     password = cparser['AUTH']['password']
 
     ig_bot = InstagramBot(username, password)
-    # ig_bot.follow_user('jimmypage')
+
+    # Wait for page load before clicking this will be changed when bot is running 24/7
+
+    time.sleep(2)
     ig_bot.upload_photo()

@@ -34,12 +34,17 @@ class reddit_scrapper:
         username = self.driver.find_elements_by_xpath(
             '// a[starts-with(@href, "/user/")]')[1].text
         
+        # Get title for the photo
+        title = self.driver.find_elements_by_tag_name('h3')[1].text
+
         # open description.txt and delete previous daily image information
         open("./daily_image/description.txt", "w").close()
         
         # write to file new image information
         file = open("./daily_image/description.txt", "a")
-        file.write(username)
+        file.write('{}. By {}'.format(title, username))
+
+        
 
 # This is here for testing delete after
 if __name__ == '__main__':
