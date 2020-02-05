@@ -85,14 +85,54 @@ class InstagramBot:
     def upload_photo(self):
         # get_photo = reddit_scrapper()
         # get_photo.get_image()
-        
+        time.sleep(2)
+        # Instagram will not allow a send_keys file path unless the svg is clicked first
         upload_button = self.driver.find_element_by_xpath(
-            '// *[@id="react-root"]/section/nav[2]/div/div/div[2]/div/div/div[3]')
-       
-        # Try different input xpath
-        file_button = self.driver.find_elements_by_xpath(
+            '//*[@id="react-root"]/section/nav[2]/div/div/div[2]/div/div/div[3]').click()
+
+        time.sleep(1)
+        # Now that the file window has been opened send the image to be uploaded to the input tag
+        input_file = self.driver.find_element_by_xpath(
+            '//*[@id="react-root"]/section/nav[2]/div/div/form/input')
+        input_file.send_keys(os.getcwd() + '/daily_image/daily.jpg')
+
+        time.sleep(1)
+        # Once an image is sent to the input instagram prompts the user to save it
+        save_button = self.driver.find_element_by_xpath(
+            '//*[@id="react-root"]/section/div[1]/header/div/div[2]/button')
+        save_button.click()
+
+        time.sleep(1)
+        # Get location of caption text area
+        text_area = self.driver.find_element_by_xpath(
+            '//*[@id="react-root"]/section/div[2]/section[1]/div[1]/textarea')
+
+        # get caption for the photo from description.txt
+        with open('./daily_image/description.txt') as f:
+            caption = f.readline()
+
+        # Send caption to the text area
+        text_area.send_keys(caption)
+
+        # Get final share button
+        share_button = self.driver.find_element_by_xpath(
+            '//*[@id="react-root"]/section/div[1]/header/div/div[2]/button')
+
+        share_button.click()
+
+    def change_profile_img(self):
+        get_photo = reddit_scrapper()
+        get_photo.get_image()
+        # Send image to instagram profile picture on the hidden input tag
+        profile_pic_button = self.driver.find_elements_by_xpath(
             '//*[@id="react-root"]/section/main/section/div[3]/div[1]/div[2]/form/input')[0].send_keys(os.getcwd() + '/daily_image/daily.jpg')
-        
+
+        time.sleep(1)
+        save_profile_pic = self.driver.find_elements_by_xpath(
+            '//button[contains(text(), "Save")]')[0].click()
+        time.sleep(1)
+        self.driver.get(base_url)
+
 
 
 #  if this is the file that is executed when you initially run the program
