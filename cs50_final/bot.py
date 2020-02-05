@@ -83,8 +83,8 @@ class InstagramBot:
         follow_button.click()
 
     def upload_photo(self):
-        # get_photo = reddit_scrapper()
-        # get_photo.get_image()
+        reddit_web_scrapper = reddit_scrapper()
+        reddit_web_scrapper.get_image()
         time.sleep(2)
         # Instagram will not allow a send_keys file path unless the svg is clicked first
         upload_button = self.driver.find_element_by_xpath(
@@ -96,7 +96,7 @@ class InstagramBot:
             '//*[@id="react-root"]/section/nav[2]/div/div/form/input')
         input_file.send_keys(os.getcwd() + '/daily_image/daily.jpg')
 
-        time.sleep(1)
+        time.sleep(2)
         # Once an image is sent to the input instagram prompts the user to save it
         save_button = self.driver.find_element_by_xpath(
             '//*[@id="react-root"]/section/div[1]/header/div/div[2]/button')
@@ -119,6 +119,11 @@ class InstagramBot:
             '//*[@id="react-root"]/section/div[1]/header/div/div[2]/button')
 
         share_button.click()
+
+        # close window because the file window was opened and selenium can't close it
+        self.driver.quit()
+
+
 
     def change_profile_img(self):
         get_photo = reddit_scrapper()
@@ -150,3 +155,6 @@ if __name__ == '__main__':
 
     time.sleep(2)
     ig_bot.upload_photo()
+    ig_bot.login()
+
+

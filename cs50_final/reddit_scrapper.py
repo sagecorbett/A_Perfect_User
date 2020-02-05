@@ -44,9 +44,5 @@ class reddit_scrapper:
         file = open("./daily_image/description.txt", "a")
         file.write('{}. By {}'.format(title, username))
 
-        
-
-# This is here for testing delete after
-if __name__ == '__main__':
-    red = reddit_scrapper()
-    red.get_image()
+        # Quit window once image and captions have been saved
+        self.driver.quit()
