@@ -1,4 +1,4 @@
-
+from random import randint
 import time
 import os
 
@@ -22,9 +22,6 @@ chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
 # class is a template that encapsulates various functionality that is in some way related
 
 class InstagramBot:
-    # this is a function that is called when you create an instance of a class
-    # self: so that we can set various attributes to this class so that they are specific
-    #  to each instance of that class
     def __init__(self, username, password):
         """
             Initializes an instance of the instagram bot class
@@ -95,7 +92,7 @@ class InstagramBot:
         input_file = self.driver.find_element_by_xpath(
             '//*[@id="react-root"]/section/nav[2]/div/div/form/input')
         input_file.send_keys(os.getcwd() + '/daily_image/daily.jpg')
-
+        
         time.sleep(2)
         # Once an image is sent to the input instagram prompts the user to save it
         save_button = self.driver.find_element_by_xpath(
@@ -121,9 +118,7 @@ class InstagramBot:
         share_button.click()
 
         # close window because the file window was opened and selenium can't close it
-        self.driver.quit()
-
-
+        time.sleep(1)
 
     def change_profile_img(self):
         get_photo = reddit_scrapper()
@@ -137,6 +132,32 @@ class InstagramBot:
             '//button[contains(text(), "Save")]')[0].click()
         time.sleep(1)
         self.driver.get(base_url)
+    
+    def restart_igbot(self, username, password):
+        self.driver.quit()
+        InstagramBot(username, password)
+
+    def like_photo(self):
+        like_button = self.driver.find_elements_by_class_name('wpO6b')[0]
+        like_button.click()
+
+    def search_hashtag(self, hashtag):
+        self.driver.get(
+            'https://www.instagram.com/explore/tags/{}'.format(hashtag))
+        time.sleep(2)
+        # mimic a scroll
+        self.driver.execute_script("window.scrollTo(0, 510)")
+        time.sleep(1)
+        self.driver.execute_script("window.scrollTo(0, 100)")
+        time.sleep(1)
+        random_pic = self.driver.find_elements_by_xpath(
+            "//a[contains(@href, '/p/')]")[randint(1,13)]
+        # Scroll like button into view
+        self.driver.execute_script("window.scrollTo(0, 300)")
+        random_pic.click()
+        
+
+
 
 
 
@@ -152,9 +173,12 @@ if __name__ == '__main__':
     ig_bot = InstagramBot(username, password)
 
     # Wait for page load before clicking this will be changed when bot is running 24/7
-
     time.sleep(2)
-    ig_bot.upload_photo()
-    ig_bot.login()
+    ig_bot.search_hashtag('sage')
+    # ig_bot.upload_photo()
+    # ig_bot.restart_igbot(username, password)
+    time.sleep(5)
+    ig_bot.like_photo()
 
+   
 

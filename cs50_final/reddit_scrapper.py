@@ -1,4 +1,3 @@
-
 import urllib.request
 import time
 import os
@@ -44,5 +43,4 @@ class reddit_scrapper:
         file = open("./daily_image/description.txt", "a")
         file.write('{}. By {}'.format(title, username))
 
-        # Quit window once image and captions have been saved
-        self.driver.quit()
+        
