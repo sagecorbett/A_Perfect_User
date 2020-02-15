@@ -145,16 +145,19 @@ class InstagramBot:
         self.driver.get(
             'https://www.instagram.com/explore/tags/{}'.format(hashtag))
         time.sleep(2)
-        # mimic a scroll
+        # # mimic a scroll
         self.driver.execute_script("window.scrollTo(0, 510)")
         time.sleep(1)
-        self.driver.execute_script("window.scrollTo(0, 100)")
+        self.driver.execute_script("window.scrollTo(0, 600)")
         time.sleep(1)
+        # Get a pic to like
         random_pic = self.driver.find_elements_by_xpath(
-            "//a[contains(@href, '/p/')]")[randint(1,13)]
-        # Scroll like button into view
-        self.driver.execute_script("window.scrollTo(0, 300)")
-        random_pic.click()
+            "//a[contains(@href, '/p/')]")[randint(5, 40)]
+        self.driver.get(random_pic.get_attribute("href"))
+
+        # time.sleep(3)
+        # self.driver.execute_script("window.scrollTo(0, 200)")
+        # self.like_photo()
         
 
 
@@ -177,8 +180,7 @@ if __name__ == '__main__':
     ig_bot.search_hashtag('sage')
     # ig_bot.upload_photo()
     # ig_bot.restart_igbot(username, password)
-    time.sleep(5)
-    ig_bot.like_photo()
+
 
    
 
