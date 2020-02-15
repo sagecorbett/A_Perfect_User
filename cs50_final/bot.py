@@ -12,6 +12,8 @@ from selenium.webdriver.chrome.options import Options
 # reddit scrapper that returns a picture
 from reddit_scrapper import reddit_scrapper
 
+from helper_functions import scroll_helper
+
 # We need these settings to start instagram in mobile view
 mobile_emulation = {
     "deviceMetrics": {"width": 360, "height": 500, "pixelRatio": 3.0},
@@ -19,7 +21,6 @@ mobile_emulation = {
 chrome_options = Options()
 chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
 
-# class is a template that encapsulates various functionality that is in some way related
 
 class InstagramBot:
     def __init__(self, username, password):
@@ -53,7 +54,8 @@ class InstagramBot:
         self.driver.find_element_by_name('password').send_keys(self.password)
 
         # Scroll the login mobile button into view
-        self.driver.execute_script("window.scrollTo(0, 50)")
+        # self.driver.execute_script("window.scrollTo(0, 50)")
+        scroll_helper(50, self.driver)
 
         # find login button by xpath
         self.driver.find_element_by_xpath(
@@ -63,12 +65,11 @@ class InstagramBot:
         # and cancel the others
         time.sleep(2)
         self.driver.get(self.base_url)
-
         time.sleep(1)
         self.driver.find_element_by_xpath(
             "//button[contains(text(), 'Cancel')]").click()
-
         time.sleep(2)
+
 
     def nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
@@ -79,7 +80,7 @@ class InstagramBot:
             "//button[contains(text(), 'Follow')]")
         follow_button.click()
 
-    def upload_photo(self):
+    def upload_photo(self, username, password):
         reddit_web_scrapper = reddit_scrapper()
         reddit_web_scrapper.get_image()
         time.sleep(2)
@@ -119,6 +120,7 @@ class InstagramBot:
 
         # close window because the file window was opened and selenium can't close it
         time.sleep(1)
+        self.restart_igbot(username, password)
 
     def change_profile_img(self):
         get_photo = reddit_scrapper()
@@ -133,31 +135,37 @@ class InstagramBot:
         time.sleep(1)
         self.driver.get(base_url)
     
+
     def restart_igbot(self, username, password):
         self.driver.quit()
         InstagramBot(username, password)
+
 
     def like_photo(self):
         like_button = self.driver.find_elements_by_class_name('wpO6b')[0]
         like_button.click()
 
+
     def search_hashtag(self, hashtag):
         self.driver.get(
             'https://www.instagram.com/explore/tags/{}'.format(hashtag))
         time.sleep(2)
-        # # mimic a scroll
-        self.driver.execute_script("window.scrollTo(0, 510)")
+
+        # mimic a scroll
+        scroll_helper(510, self.driver)
         time.sleep(1)
-        self.driver.execute_script("window.scrollTo(0, 600)")
+        scroll_helper(600, self.driver)
         time.sleep(1)
-        # Get a pic to like
+
+        # Get a random pic to like
         random_pic = self.driver.find_elements_by_xpath(
             "//a[contains(@href, '/p/')]")[randint(5, 40)]
         self.driver.get(random_pic.get_attribute("href"))
 
-        # time.sleep(3)
-        # self.driver.execute_script("window.scrollTo(0, 200)")
-        # self.like_photo()
+        # Scroll like button into view and click it
+        time.sleep(3)
+        scroll_helper(200, self.driver)
+        self.like_photo()
         
 
 
@@ -176,10 +184,10 @@ if __name__ == '__main__':
     ig_bot = InstagramBot(username, password)
 
     # Wait for page load before clicking this will be changed when bot is running 24/7
-    time.sleep(2)
-    ig_bot.search_hashtag('sage')
-    # ig_bot.upload_photo()
-    # ig_bot.restart_igbot(username, password)
+    # time.sleep(2)
+    # ig_bot.search_hashtag('sage')
+    ig_bot.upload_photo(username, password)
+
 
 
    
