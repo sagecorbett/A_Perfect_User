@@ -74,11 +74,13 @@ class InstagramBot:
     def nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
 
+
     def follow_user(self, user):
         self.nav_user(user)
         follow_button = self.driver.find_element_by_xpath(
             "//button[contains(text(), 'Follow')]")
         follow_button.click()
+
 
     def upload_photo(self, username, password):
         reddit_web_scrapper = reddit_scrapper()
@@ -122,6 +124,7 @@ class InstagramBot:
         time.sleep(1)
         self.restart_igbot(username, password)
 
+
     def change_profile_img(self):
         get_photo = reddit_scrapper()
         get_photo.get_image()
@@ -148,7 +151,7 @@ class InstagramBot:
 
     def search_hashtag(self, hashtag):
         self.driver.get(
-            'https://www.instagram.com/explore/tags/{}'.format(hashtag))
+            '{}/explore/tags/{}'.format(self.base_url, hashtag))
         time.sleep(2)
 
         # mimic a scroll
@@ -166,6 +169,10 @@ class InstagramBot:
         time.sleep(3)
         scroll_helper(200, self.driver)
         self.like_photo()
+
+        # Retrun bot to homepage after clicking like
+        time.sleep(0.5)
+        self.driver.get(self.base_url)
         
 
 
@@ -186,9 +193,9 @@ if __name__ == '__main__':
     # Wait for page load before clicking this will be changed when bot is running 24/7
     # time.sleep(2)
     # ig_bot.search_hashtag('sage')
-    ig_bot.upload_photo(username, password)
+    # ig_bot.upload_photo(username, password)
 
 
 
-   
+
 

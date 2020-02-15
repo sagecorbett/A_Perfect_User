@@ -2,12 +2,14 @@ import urllib.request
 import time
 import os
 
+
 # automate the webbrowser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 chrome_options = webdriver.ChromeOptions()
 prefs = {'download.default_directory': './daily_image'}
 chrome_options.add_experimental_option('prefs', prefs)
+
 
 class reddit_scrapper:
     def __init__(self):
@@ -43,5 +45,6 @@ class reddit_scrapper:
         file = open("./daily_image/description.txt", "a")
         file.write('{}. By {}'.format(title, username))
 
-        
+        # close window after photo is saved
+        self.driver.quit()
         
