@@ -2,8 +2,8 @@
 import os
 
 
-myfile = open('./hashtags/musicdel.txt', 'r');
-music = open('./hashtags/music.txt', 'a')
+myfile = open('./hashtags/del.txt', 'r');
+music = open('./hashtags/popular.txt', 'a')
 
 for line in myfile:
     music.write(line.replace('#', ''))

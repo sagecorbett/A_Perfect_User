@@ -80,6 +80,8 @@ class InstagramBot:
         follow_button = self.driver.find_element_by_xpath(
             "//button[contains(text(), 'Follow')]")
         follow_button.click()
+        time.sleep(1)
+        self.driver.get(self.base_url)
 
 
     def upload_photo(self, username, password):
@@ -193,7 +195,7 @@ if __name__ == '__main__':
     # Wait for page load before clicking this will be changed when bot is running 24/7
     # time.sleep(2)
     # ig_bot.search_hashtag('sage')
-    # ig_bot.upload_photo(username, password)
+    ig_bot.upload_photo(username, password)
 
 
 
