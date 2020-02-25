@@ -46,5 +46,10 @@ class reddit_scrapper:
         file.write('{}. By {}'.format(title, username))
 
         # close window after photo is saved
+    def quit_reddit(self):
         self.driver.quit()
         
+
+if __name__ == "__main__":
+    bot = reddit_scrapper()
+    bot.get_image()
