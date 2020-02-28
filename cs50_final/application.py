@@ -3,25 +3,25 @@ from instabot import InstagramBot
 import configparser
 import time
 import random
-
-
+from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
+
+
 app = Flask(__name__)
 
-# Configuration for the instagram login
+# Configuration for the instagram bot login
 config = './config.ini'
 cparser = configparser.ConfigParser()
 cparser.read(config)
-
 username = cparser['AUTH']['username']
 password = cparser['AUTH']['password']
-
 bot = InstagramBot(username, password)
 
-while True:
-    time.sleep(1)
-    random_word = random.choice(open('./hashtags/music.txt').readlines())
-    bot.search_hashtag('car')
+
+# Create a new instance of background scheduler
+scheduler = BackgroundScheduler()
+job = scheduler.add_job(bot.upload_photo(username, password), 'interval', days=2)
+scheduler.start()
 
 
 @app.route('/followuser', methods=['POST'])
