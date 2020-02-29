@@ -5,6 +5,7 @@ import time
 import random
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
+from helper_functions import get_random_hashtag
 
 
 app = Flask(__name__)
@@ -17,12 +18,16 @@ username = cparser['AUTH']['username']
 password = cparser['AUTH']['password']
 bot = InstagramBot(username, password)
 
-
 # Create a new instance of background scheduler
 scheduler = BackgroundScheduler()
-job = scheduler.add_job(bot.upload_photo(username, password), 'interval', days=2)
-scheduler.start()
 
+# upload a photo every 2 days
+# upload_new_photo = scheduler.add_job(bot.upload_photo(username, password), 'interval', days=2)
+
+# like a random photo from a random hashtag. once randomly between 1 to 10 hours.
+like_random_photos = scheduler.add_job(bot.search_hashtag, 'interval', hours=random.randint(1,10))
+
+scheduler.start()
 
 @app.route('/followuser', methods=['POST'])
 def newfollow():

@@ -12,7 +12,7 @@ from selenium.webdriver.chrome.options import Options
 # reddit scrapper that returns a picture
 from reddit_scrapper import reddit_scrapper
 
-from helper_functions import scroll_helper
+from helper_functions import scroll_helper, get_random_hashtag
 
 # We need these settings to start instagram in mobile view
 mobile_emulation = {
@@ -55,7 +55,7 @@ class InstagramBot:
 
         # Scroll the login mobile button into view
         # self.driver.execute_script("window.scrollTo(0, 50)")
-        scroll_helper(50, self.driver)
+        scroll_helper(100, self.driver)
 
         # find login button by xpath
         self.driver.find_element_by_xpath(
@@ -151,7 +151,8 @@ class InstagramBot:
         like_button.click()
 
 
-    def search_hashtag(self, hashtag):
+    def search_hashtag(self):
+        hashtag = get_random_hashtag()
         self.driver.get(
             '{}/explore/tags/{}'.format(self.base_url, hashtag))
         time.sleep(2)
@@ -169,7 +170,7 @@ class InstagramBot:
 
         # Scroll like button into view and click it
         time.sleep(3)
-        scroll_helper(200, self.driver)
+        scroll_helper(500, self.driver)
         self.like_photo()
 
         # Retrun bot to homepage after clicking like
@@ -195,7 +196,7 @@ if __name__ == '__main__':
     # Wait for page load before clicking this will be changed when bot is running 24/7
     # time.sleep(2)
     # ig_bot.search_hashtag('sage')
-    ig_bot.upload_photo(username, password)
+    # ig_bot.upload_photo(username, password)
 
 
 
