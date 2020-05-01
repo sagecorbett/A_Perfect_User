@@ -63,7 +63,7 @@ class InstagramBot:
 
         # Instagram throws a lot of notifications when logging in. This will redirect to clear some
         # and cancel the others
-        time.sleep(2)
+        time.sleep(4)
         self.driver.get(self.base_url)
         time.sleep(1)
         self.driver.find_element_by_xpath(
