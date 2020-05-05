@@ -19,7 +19,7 @@ This bot was not made to gain followers or likes but just behave like a normal p
 ## Follow User
 
 <!-- ![Gif showing following a user](./assets/follow_user.gif) -->
-<img src="./assets/follow_user.gif" alt="Gif showing following a user" style="height: 400px">
+<img src="./assets/follow_user.gif" alt="Gif showing following a user" height="400">
 
 
 
