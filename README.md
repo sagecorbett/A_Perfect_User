@@ -18,17 +18,15 @@ This bot was not made to gain followers or likes but just behave like a normal p
 
 ## Follow User
 
-<!-- ![Gif showing following a user](./assets/follow_user.gif) -->
-<img src="./assets/follow_user.gif" alt="Gif showing following a user" height="400">
+<img src="./assets/follow_user.gif" alt="Gif showing following a user" height="600">
 
 
 
 ## Like a Random Image
 
-![Gif showing a random Image being liked](./assets/like_photo.gif)
-
+<img src="./assets/like_photo.gif" alt="Gif showing a random Image being liked" height="600">
 
 
 ## Upload an Image
 
-![Gif showing degrees](./assets/upload_photo.gif)
+<img src="./assets/upload_photo.gif" alt="Gif showing a photo being uploaded" height="600">
