@@ -13,7 +13,7 @@ This bot was not made to gain followers or likes but just behave like a normal p
 
 ## Login
 
-![Gif showing logging in](./assets/login.gif)
+![Gif showing logging in](./assets/login.gif =300x)
 
 
 
