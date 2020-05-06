@@ -2,7 +2,8 @@
 My Harvard CS50 final project. 
 
 "A Perfect User" is a full featured bot that behaves like what I believe the ideal instagram user would. This python program logs into instagram and performs tasks such as:
- - Like an image randomly between every 1 to 10 hours
+ - Follow users.
+ - Like an image randomly between every 1 to 10 hours.
  - Save the top image from reddit.com/r/pics along with the description and user who posted it then post it to instagram. This program does this every two days.
 
 ### Running this program
