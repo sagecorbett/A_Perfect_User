@@ -15,6 +15,10 @@ This bot was not made to gain followers or likes but just behave like a normal p
 
 ![Gif showing logging in](./assets/login.gif)
 
+## Upload an Image
+
+<img src="./assets/upload_photo.gif" alt="Gif showing a photo being uploaded">
+
 
 ## Follow User
 
@@ -25,8 +29,3 @@ This bot was not made to gain followers or likes but just behave like a normal p
 ## Like a Random Image
 
 <img src="./assets/like_photo.gif" alt="Gif showing a random Image being liked" height="600">
-
-
-## Upload an Image
-
-<img src="./assets/upload_photo.gif" alt="Gif showing a photo being uploaded" height="600">
