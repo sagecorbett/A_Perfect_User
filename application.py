@@ -25,7 +25,7 @@ def main():
         username_or_email, password), 'interval', days=2)
 
     # like a random photo from a random hashtag. once randomly between 1 to 10 hours.
-    like_random_photos = scheduler.add_job(bot.search_hashtag, 'interval', hours=random.randint(1,10))
+    # like_random_photos = scheduler.add_job(bot.search_hashtag, 'interval', hours=random.randint(1,10))
 
     scheduler.start()
 
