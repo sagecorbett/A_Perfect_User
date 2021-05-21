@@ -1,3 +1,6 @@
+* Since this code was written over a year ago I am not sure if it still works when it is ran * 
+
+
 # A_Perfect_User
 My Harvard CS50 final project. 
 
