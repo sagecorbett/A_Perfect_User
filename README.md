@@ -1,4 +1,4 @@
-* Since this code was written over a year ago I am not sure if it still works when it is ran * 
+* Since this code was written over a 2 years ago I am not sure if this code still works as is. If you want to use this code just double check that the classes that the bot scrapes from instagrams website are still the same. * 
 
 
 # A_Perfect_User
